@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <style>
+            body {
+                margin: 20px;
+            }
+            img {
+                height: 100vh;
+                width: 100%;
+            }
+        </style>
+        <script type="application/javascript">
+            let cnt = 1
+            function refreshFlow() {
+                document.querySelector('#flow').setAttribute('src', `__flow.svg?v=${cnt}`)
+                cnt += 1
+                setTimeout(function() {
+                    refreshFlow()
+                }, 1000)
+            }
+        </script>
+    </head>
+    <body>
+        <img id="flow" src="__flow.svg" />
+        <script type="application/javascript">refreshFlow()</script>
+    </body>
+</html>

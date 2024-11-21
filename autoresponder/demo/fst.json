@@ -1,0 +1,11 @@
+{
+    "featureName": "simple.demo",
+    "junction": "devdanielmo",
+    "projectRoot": "/Users/danielmor/projects",
+    "bundleType" : "simple",
+    "interceptPattern": "https://webappisamdev.asbbank.co.nz/features/simple.demo/1.1.8/build",
+    "replacements": {
+        "286.js" : "895.js"
+    }
+
+}
