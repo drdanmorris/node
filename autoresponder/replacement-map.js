@@ -23,8 +23,9 @@ export function initReplacementMap(config) {
 export function getReplacementBodyFor(url, fileMap) {
     const localPath = getLocalPathFromFileMap(url, fileMap)
     if (localPath && fs.existsSync(localPath)) {
-        console.log(`Replacing content for ${url.split('/').pop()}`)
-        return fs.readFileSync(localPath)
+        const content =  fs.readFileSync(localPath)
+        console.log(`Replacing content:\n  for: ${url.split('/').pop()} \n  from: ${localPath} (${content?.length})\n`)
+        return content
     }
     return undefined
 }

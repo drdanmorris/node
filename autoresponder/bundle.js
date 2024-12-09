@@ -17,7 +17,7 @@ export function getAbsNameFor(url) {
 export function mapBundleFiles(config, fileMap) {
     mapBundleFilesIn(config, 'js', fileMap)
     mapBundleFilesIn(config, 'css', fileMap)
-    mapBundleFilesIn(config, 'html', fileMap)
+    //mapBundleFilesIn(config, 'html', fileMap)  // no can do
 }
   
 function mapBundleFilesIn(config, fileType, fileMap) {

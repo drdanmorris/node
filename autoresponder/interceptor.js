@@ -53,7 +53,7 @@ async function interceptRequestsForPage(page) {
         client.on('Network.requestIntercepted', async ({ interceptionId, request, responseHeaders}) => {
             const url = request.url
             const ctx = {url, client, interceptionId, responseHeaders}
-            log(`Intercepted ${getShortUrlFor(url)}`)
+            log(`\nIntercepted ${getShortUrlFor(url)}`)
             let newBody = await handleRequest(url)
 
             if (newBody) {
@@ -88,6 +88,7 @@ export async function start(url, cbRequest, patterns) {
         headless:false, 
         defaultViewport:null,
         devtools: true,
+        pipe: true,
         args: ['--window-size=1920,1170','--window-position=0,0']
     });
 

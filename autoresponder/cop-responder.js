@@ -1,6 +1,6 @@
-import {start} from './interceptor.js'
+import {start} from './interceptor-fetch.js'
 import { initReplacementMap, getReplacementBodyFor } from './replacement-map.js'
-import { getConfigFor } from './asb-config.js'
+import { getConfigFor, baseConfig } from './asb-config.js'
 import { mapBundleFiles } from './bundle.js'
 import { auditInterception } from './intercept-audit.js'
 import * as fs from 'fs'
@@ -8,7 +8,7 @@ import * as fs from 'fs'
 const app = 'map'
 const env = 'fst'
 const config = getConfigFor(app, env)
-const configUrl = 'https://webappisamdev.asbbank.co.nz/container/v4/configuration'
+const configUrl = `https://${baseConfig.isam.qa}/container/v4/configuration`
 
 if (config) {
     let fileMap = initReplacementMap(config)
@@ -27,22 +27,30 @@ if (config) {
             urlPattern: `${config.interceptPattern}/*`,
             resourceType: "Stylesheet"
         })
+
+        // Cant replace docs, as the bundle names will change and we'll end up with 404s
+        // interceptionPatterns.push({
+        //     urlPattern: `${config.interceptPattern}/*`,
+        //     resourceType: "Document"
+        // })
     }
 
-    interceptionPatterns.push({
-        urlPattern: configUrl,
-        resourceType: "XHR"
-    })
+    // interceptionPatterns.push({
+    //     urlPattern: configUrl,
+    //     resourceType: "XHR"
+    // })
 
     const enabled = true
 
     if (enabled) {
         fs.writeFileSync('./__fileMap.json', JSON.stringify(fileMap, undefined, 2))
         start(config.launchUrl, (url) => {
-            if (configUrl === url) {
-                console.log('Returning stub configuration')
-                return fs.readFileSync('__configuration.json', {"encoding": "utf-8"})
-            } 
+
+            // cant stub config, as the response has a signature to prevent tampering.
+            // if (configUrl === url) {
+            //     console.log('Returning stub configuration')
+            //     return fs.readFileSync('__configuration.json', {"encoding": "utf-8"})
+            // } 
 
             const newBody = getReplacementBodyFor(url, fileMap)
             //auditInterception(url, typeof newBody !== 'undefined')

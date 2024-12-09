@@ -1,6 +1,6 @@
 import { readFileSync, existsSync } from 'fs'
 
-const baseConfig = {
+export const baseConfig = {
     isam: {
         fst: 'webappisamdev.asbbank.co.nz',
         qa: 'qaonline.asb.co.nz',
