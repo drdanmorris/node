@@ -1,12 +1,6 @@
 import { readFileSync, existsSync } from 'fs'
 
-export const baseConfig = {
-    isam: {
-        fst: 'webappisamdev.asbbank.co.nz',
-        qa: 'qaonline.asb.co.nz',
-        prod: 'online.asb.co.nz'
-    }
-}
+export const isam = 'TODO'
 
 export function getConfigFor(app, env) {
     const configPath = `${process.cwd()}/${app}/${env}.json`
@@ -16,7 +10,6 @@ export function getConfigFor(app, env) {
 
         try {
             const envConfig = JSON.parse(configFile)
-            const isam = baseConfig.isam[env]
             const config = {
                 buildDir: '',
                 launchUrl: `https://${isam}/${envConfig.junction}`,

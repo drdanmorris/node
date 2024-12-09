@@ -1,6 +1,6 @@
 import {start} from './interceptor-fetch.js'
 import { initReplacementMap, getReplacementBodyFor } from './replacement-map.js'
-import { getConfigFor, baseConfig } from './asb-config.js'
+import { getConfigFor, isam } from './asb-config.js'
 import { mapBundleFiles } from './bundle.js'
 import { auditInterception } from './intercept-audit.js'
 import * as fs from 'fs'
@@ -8,7 +8,7 @@ import * as fs from 'fs'
 const app = 'map'
 const env = 'fst'
 const config = getConfigFor(app, env)
-const configUrl = `https://${baseConfig.isam.qa}/container/v4/configuration`
+const configUrl = `https://${isam}/container/v4/configuration`
 
 if (config) {
     let fileMap = initReplacementMap(config)
