@@ -48,6 +48,8 @@ async function interceptRequestsForPage(page) {
         
         const client = await page.target().createCDPSession();
         await client.send('Network.enable');
+        //await client.send('Page.enable');
+        //await client.send('Fetch.disable');
         await client.send('Network.setRequestInterception', interceptOptions);
 
         client.on('Network.requestIntercepted', async ({ interceptionId, request, responseHeaders}) => {

@@ -1,10 +1,22 @@
 import { readFileSync, existsSync } from 'fs'
+import { ISAM } from './__env.js'
 
-export const isam = 'TODO'
+/*
+example config:
+
+{
+    "featureName": "feature.name",
+    "junction": "foo",
+    "projectRoot": "/Users/me/projects",
+    "bundleType" : "chunked"
+}
+
+*/
 
 export function getConfigFor(app, env) {
-    const configPath = `${process.cwd()}/${app}/${env}.json`
-
+    const configPath = `${process.cwd()}/__config/${app}.json`
+    const isam = env === 'fst' ? ISAM.fst :  ISAM.qa
+    
     if (existsSync(configPath)) {
         const configFile = readFileSync(configPath, {"encoding": "utf-8"})
 

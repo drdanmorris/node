@@ -132,4 +132,5 @@ dist
 .pnp.*
 
 .DS_Store
-
+__env.js
+__config/
